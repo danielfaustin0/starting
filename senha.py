@@ -10,9 +10,16 @@ while chance < 3:
     if len(senha) >= 8:
         # verifica se a senha tem pelo menos um número
         if any(char.isdigit() for char in senha):
-            # Imprime mensagem de que a senha é válida
-            print("Senha válida!")
-            break
+            # Valida a senha e pede para o usuário confirmar
+            confirma = input("Senha salva!\nConfirme a senha: ")
+
+            if (confirma == senha):
+                print("Cadastro liberado. Efetue login.")
+                break
+            else:
+                print("As senhas devem ser idênticas.")
+                chance += 1
+            
         else:
             # Imprime mensagem de que a senha é inválida por falta de número
             print("Senha inválida - Precisa conter pelo menos um número")
@@ -23,5 +30,21 @@ while chance < 3:
         print("Senha inválida - Precisa de pelo menos 8 dígitos")
         #incrementar chance
         chance += 1
+else:
+    print("ACESSO BLOQUEADO")
+
+
+# Checando a senha salva e validando o acesso
+
+while chance < 3:
+    print("\nACESSO AO SISTEMA")
+    senha_acesso = input("SENHA: ")
+
+    if (senha_acesso == senha):
+        print("ACESSO LIBERADO")
+        break
+    else:
+        print("Senha inválida. Cheque e tente novamente.")
+        chance +=1
 else:
     print("ACESSO BLOQUEADO")

@@ -12,6 +12,7 @@ while chance < 3:
         if any(char.isdigit() for char in senha):
             # Imprime mensagem de que a senha é válida
             print("Senha válida!")
+            break
         else:
             # Imprime mensagem de que a senha é inválida por falta de número
             print("Senha inválida - Precisa conter pelo menos um número")

@@ -1,53 +1,58 @@
 # programa para validar senha
-
-def cadastrar_senha():
-    # Permitir que o usuário tenha três chances para cadastrar a senha
-    chance = 0
-
-    while chance < 3:
-        senha = input("Informe a senha: ")
-
-        # Verificar se a senha tem mais de 8 dígitos
-        if len(senha) >= 8:
-            # verifica se a senha tem pelo menos um número
-            if any(char.isdigit() for char in senha):
-                # Valida a senha e pede para o usuário confirmar
-                confirma = input("Senha salva!\nConfirme a senha: ")
-
-                if (confirma == senha):
-                    print("Cadastro liberado. Efetue login.")
-                    return senha
-                    break
-                else:
-                    print("As senhas deve ser idênticas.")
-                    senha
-        else:
-            # Imprime mensagem de que a senha não atende os requisitos mínimos
-            print("Os requesitos mínimos não foram atendidos;\n  - Pelo menos 8 caracteres.\n  - Pelo menos um número.")
-            #incrementar chance
-            print(f"Chance {chance + 1}/3")
-            chance += 1
-    else:
-        print("ACESSO BLOQUEADO")
-        return None
-
-def fazer_login(senha):
-    # Checando a senha salva e validando o acesso
-    chance = 0
-
-    while chance < 3:
-        print("\nACESSO AO SISTEMA")
-        senha_acesso = input("SENHA: ")
-
-        if (senha_acesso == senha):
-            print("ACESSO LIBERADO")
-            break
-        else:
-            print("Senha inválida. Cheque e tente novamente.")
-            chance +=1
-    else:
-        print("ACESSO BLOQUEADO")
-
-acesso = cadastrar_senha()
-if acesso:
     fazer_login(acesso)
+
+class SistemadeLogin:
+    def __init__ (self):
+        self.senha_cadastrada = None
+        self.senha_confirmada = None
+        self.senha_acesso = None
+        self.tentavivas = 0
+    
+    def cadastrar_senha(self):
+        # programar a lógisca para cadastro
+        while (self.tentavivas < 3):
+            self.senha_cadastrada = input("Informe a senha: ")
+
+            if len(self.senha_cadastrada) >= 8:
+                if any(digit.isdigit() for digit in self.senha_cadastrada):
+                    print("Senha salva!\nConfirme a senha: ")
+                    self.senha_confirmada = input()
+
+                    if self.senha_cadastrada == self.senha_confirmada:
+                        print("SENHA SALVA!")
+                        self.tentavivas = 0
+                        return self.senha_cadastrada
+                    else:
+                        print("As senhas devem ser idênticas.")
+                else:
+                    print("A senha deve ter pelo menos um número.")
+            else:
+                print("A senha deve ter pelo menos 8 dígitos")
+            self.tentavivas += 1
+            print(f"tentativa:{self.tentavivas}/3")
+        else:
+            print("ACESSO BLOQUEADO!")
+
+
+    def acesso_sistema(self):
+        # programar a lógica de acesso ao sistema
+        if not self.senha_cadastrada:
+            print("Nenhuma senha salva. Programa encerrado.")
+            return
+        while self.tentavivas < 3:
+            print("ACESSO AO SISTEMA")
+            self.senha_acesso = input("SENHA: ")
+
+            if (self.senha_acesso == self.senha_cadastrada):
+                print("ACESSO LIBERADO")
+                break
+            else:
+                print("Senha inválida.")
+            self.tentavivas += 1
+            print(f"Tentativa: {self.tentavivas}/3")
+        else:
+            print("PROGRAMA ENCERRADO")
+
+sistema = SistemadeLogin()
+sistema.cadastrar_senha()
+sistema.acesso_sistema()

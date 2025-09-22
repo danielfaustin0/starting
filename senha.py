@@ -17,19 +17,15 @@ def cadastrar_senha():
                 if (confirma == senha):
                     print("Cadastro liberado. Efetue login.")
                     return senha
+                    break
                 else:
-                    print("As senhas devem ser idênticas.")
-                    chance += 1
-                
-            else:
-                # Imprime mensagem de que a senha é inválida por falta de número
-                print("Senha inválida - Precisa conter pelo menos um número")
-                #incrementar chance
-                chance += 1
+                    print("As senhas deve ser idênticas.")
+                    senha
         else:
-            # Imprime mensagem de que a senha é inválida por caracteres insuficientes
-            print("Senha inválida - Precisa de pelo menos 8 dígitos")
+            # Imprime mensagem de que a senha não atende os requisitos mínimos
+            print("Os requesitos mínimos não foram atendidos;\n  - Pelo menos 8 caracteres.\n  - Pelo menos um número.")
             #incrementar chance
+            print(f"Chance {chance + 1}/3")
             chance += 1
     else:
         print("ACESSO BLOQUEADO")

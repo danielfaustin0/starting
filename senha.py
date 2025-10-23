@@ -18,7 +18,7 @@ class SistemaDeLogin:
                 if (senha1 == senha2):
                     print("Senha salva!")
                     self.senha_cadastro = senha1
-                    return self.senha_cadastro
+                    return True
                 else:
                     print("As senhas devem ser identicas.")
             else:
@@ -27,40 +27,22 @@ class SistemaDeLogin:
             print(f"tentativa:{self.tentavivas_cadastro}/3")
         else:
             print(self.msg_bloqueio)
-            return
-
-    '''def validar_senha(self):
-        # Validar senha cadastrada
-        if not self.senha_cadastrada:
-            return
-
-        while (self.tentavivas < 3):
-            self.senha_confirmada = input("Confirme a senha:\n")
-
-            if (self.senha_cadastrada == self.senha_confirmada):
-                print("SENHA SALVA!")
-                self.tentavivas = 0
-                return self.senha_confirmada
-            else:
-                print("As senhas devem ser idênticas.")
-            self.tentavivas += 1
-            print(f"Tentivas: {self.tentavivas}/3")
-        else:
-            print(self.msg_bloqueio)'''
+            return False
 
 
     def acessar(self):
         # programar a lógica de acesso ao sistema
         if not self.senha_cadastro:
             print("Nenhuma senha salva. Programa encerrado.")
-            return
+            return False
         while self.tentavivas_acesso < 3:
             print("ACESSO AO SISTEMA")
             self.senha_acesso = input("SENHA: ")
 
             if (self.senha_acesso == self.senha_cadastro):
                 print("ACESSO LIBERADO")
-                break
+                return True
+                # break
             else:
                 print("Senha inválida.")
             self.tentavivas_acesso += 1
@@ -69,5 +51,5 @@ class SistemaDeLogin:
             print("PROGRAMA ENCERRADO")
 
 sistema = SistemaDeLogin()
-sistema.cadastrar()
-sistema.acessar()
+if sistema.cadastrar():
+    sistema.acessar()
